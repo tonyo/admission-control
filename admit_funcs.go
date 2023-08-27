@@ -2,9 +2,10 @@ package admissioncontrol
 
 import (
 	"fmt"
+
 	"golang.org/x/xerrors"
 
-	admission "k8s.io/api/admission/v1beta1"
+	admission "k8s.io/api/admission/v1"
 	apps "k8s.io/api/apps/v1"
 	batch "k8s.io/api/batch/v1"
 	core "k8s.io/api/core/v1"

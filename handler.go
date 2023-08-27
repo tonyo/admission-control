@@ -3,12 +3,13 @@ package admissioncontrol
 import (
 	"encoding/json"
 	"fmt"
-	"golang.org/x/xerrors"
 	"io"
 	"io/ioutil"
 	"net/http"
 
-	admission "k8s.io/api/admission/v1beta1"
+	"golang.org/x/xerrors"
+
+	admission "k8s.io/api/admission/v1"
 	meta "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/serializer"
