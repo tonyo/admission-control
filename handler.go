@@ -142,7 +142,9 @@ func (ah *AdmissionHandler) handleAdmissionRequest(w http.ResponseWriter, r *htt
 		Response: reviewResponse,
 	}
 
-	res, err := json.Marshal(&review)
+	// res, err := json.Marshal(&review)
+	res, err := review.Marshal()
+
 	if err != nil {
 		return AdmissionError{false, "marshalling the review response failed", err.Error()}
 	}
