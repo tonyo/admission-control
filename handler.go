@@ -147,6 +147,12 @@ func (ah *AdmissionHandler) handleAdmissionRequest(w http.ResponseWriter, r *htt
 		return AdmissionError{false, "marshalling the review response failed", err.Error()}
 	}
 
+	ah.Logger.Log(
+		"msg", "admission response",
+		"resp", res,
+		"debug", "yes",
+	)
+
 	w.WriteHeader(http.StatusOK)
 	w.Write(res)
 
