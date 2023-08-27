@@ -12,6 +12,7 @@ import (
 	admission "k8s.io/api/admission/v1"
 	meta "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/apimachinery/pkg/runtime/serializer"
 
 	log "github.com/go-kit/kit/log"
@@ -120,7 +121,9 @@ func (ah *AdmissionHandler) handleAdmissionRequest(w http.ResponseWriter, r *htt
 	}
 
 	incomingReview := admission.AdmissionReview{}
-	if _, _, err := ah.deserializer.Decode(body, nil, &incomingReview); err != nil {
+	var gvk *schema.GroupVersionKind
+	_, gvk, err = ah.deserializer.Decode(body, nil, &incomingReview)
+	if err != nil {
 		return AdmissionError{false, "decoding the review request failed", err.Error()}
 	}
 
@@ -141,9 +144,9 @@ func (ah *AdmissionHandler) handleAdmissionRequest(w http.ResponseWriter, r *htt
 	review := admission.AdmissionReview{
 		Response: reviewResponse,
 	}
+	review.SetGroupVersionKind(*gvk)
 
-	// res, err := json.Marshal(&review)
-	res, err := review.Marshal()
+	res, err := json.Marshal(&review)
 
 	if err != nil {
 		return AdmissionError{false, "marshalling the review response failed", err.Error()}
