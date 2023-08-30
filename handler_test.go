@@ -4,11 +4,12 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
-	admission "k8s.io/api/admission/v1beta1"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	admission "k8s.io/api/admission/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 func newTestAdmitFunc(allowed bool, returnError bool) AdmitFunc {
