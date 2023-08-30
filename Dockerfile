@@ -1,6 +1,6 @@
-FROM golang:1.15 as build
+FROM golang:1.20 as build
 
-LABEL repo="https://github.com/elithrar/admission-control"
+LABEL repo="https://github.com/tonyo/admission-control"
 ARG GIT_COMMIT=""
 LABEL commit=$GIT_COMMIT
 ENV GIT_COMMIT=$GIT_COMMIT

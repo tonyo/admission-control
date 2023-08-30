@@ -65,7 +65,7 @@ More built-ins are coming soon, and suggestions are welcome! ⏳
 
 The core type of the library is the [`AdmitFunc`](https://godoc.org/github.com/elithrar/admission-control#AdmitFunc) - a function that takes a k8s `AdmissionReview` object and returns an `(*AdmissionResponse, error)` tuple. You can provide a closure that returns an `AdmitFunc` type if you need to inject additional dependencies into your handler, and/or use a constructor function to do the same.
 
-The `AdmissionReview` type wraps the [`AdmissionRequest`](https://godoc.org/k8s.io/api/admission/v1beta1#AdmissionRequest), which can be serialized into a concrete type—such as a `Pod` or `Service`—and subsequently validated.
+The `AdmissionReview` type wraps the [`AdmissionRequest`](https://godoc.org/k8s.io/api/admission/v1#AdmissionRequest), which can be serialized into a concrete type—such as a `Pod` or `Service`—and subsequently validated.
 
 An example `AdmitFunc` looks like this:
 
@@ -201,7 +201,7 @@ kubectl config view --raw --minify --flatten -o jsonpath='{.clusters[].cluster.c
 Specifically, you'll want to make sure your manifest looks like this:
 
 ```yaml
-apiVersion: admissionregistration.k8s.io/v1beta1
+apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingWebhookConfiguration
 metadata:
   name: deny-public-services
